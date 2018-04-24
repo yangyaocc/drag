@@ -1,0 +1,2341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>编辑器</title>
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/Initialization.css">
+	<link rel="stylesheet" href="css/frame.css">
+	<link rel="stylesheet" href="css/farbtastic.css">
+	<!-- 页面样式 -->
+	<link rel="stylesheet" href="css/indexDrag.css">
+	<link rel="stylesheet" href="css/com.css">
+	<!-- 编辑样式 -->
+	<link rel="stylesheet" href="css/edit.css">
+</head>
+<body style="overflow:hidden;">
+	<div class="content">
+		<div class="decorate_top">
+			<img src="images/logo.png" alt="">
+			<ul>
+				<li><a class="saveScheme_but" data-toggle="tab" href="#save_scheme"><i class="fa fa-floppy-o"></i>保存方案</a></li>
+				<li><a class="loadingScheme_but" data-toggle="tab" href="#loading_scheme"><i class="fa fa-folder-open"></i>载入方案</a></li>
+				<li><a><i class="fa fa-eye"></i>预览</a></li>
+				<li><a class="release"><i class="fa fa-refresh"></i>发布</a></li>
+			</ul>
+			<p><a href=""><i class="fa fa-external-link"></i>退出</a></p>
+		</div>
+		<div class="page">
+			<div class="page_nav">
+				<a class="on">首页<i class="fa fa-close"></i></a>
+				<a>新闻<i class="fa fa-close"></i></a>
+				<a>简介<i class="fa fa-close"></i></a>
+				<a>新闻<i class="fa fa-close"></i></a>
+				<a>会员<i class="fa fa-close"></i></a>
+				<a>活动<i class="fa fa-close"></i></a>
+				<a>圈子<i class="fa fa-close"></i></a>
+				<a>捐赠<i class="fa fa-close"></i></a>
+			</div>
+			<div class="loadHtml">
+
+			</div>
+		</div>
+		<!-- 页面选择面板 -->
+		<div class="fixed_l_r left_page_nav">
+			<div class="pg_t"><i class="fa fa-align-justify"></i>功能区</div>
+			<div class="fun_module">
+				<div class="mod layout_but">
+					<p>布局</p>
+					<span><i class="fa fa-table"></i></span>
+					<em class="fa fa-angle-right"></em>
+				</div>
+				<div class="mod beautify_but" anchor="#beautify">
+					<p>美化</p>
+					<span class="mh_img"><img src="images/mh.png"></span>
+					<em class="fa fa-angle-right"></em>
+				</div>
+			</div>
+		</div>
+		<!-- 功能区面板 -->
+		<div class="fixed_l_r right_page_nav">
+			<div class="pg_t"><i class="fa fa-chevron-up"></i>页面区</div>
+			<div class="pg_n">
+				<a href=""><em></em>首页</a>
+				<a href=""><em></em>简介</a>
+				<a href=""><em></em>新闻</a>
+				<a href=""><em></em>会员</a>
+				<a href=""><em></em>活动</a>
+				<a href=""><em></em>圈子</a>
+				<a href=""><em></em>捐赠</a>
+				<a href=""><em></em>文库</a>
+				<a href=""><em></em>问卷</a>
+				<a href=""><em></em>帮帮忙</a>
+				<a href=""><em></em>资源</a>
+				<a href=""><em></em>期刊</a>
+			</div>
+		</div>
+		<!-- 右侧弹出模块 -->
+
+		<div class="right_alert" style="right:100px;">
+			<div class="operation_panel layout right_number_0">
+				<h3><span>网站LOGO</span></h3>
+				<div class="out" style="margin:0 6px;">
+					<div class="inner">
+						<div class="logo_set">
+							<div class="upImg_wra">
+								<div class="upImg_show"><img src="<%-logojson.imgSrc%>" class="loadImg"><i class="fa fa-camera"></i></div>
+								<div class="upImg_but">
+									<a class="upLogo"><i class="fa fa-camera"></i>上传<input type="file" id="up_img_0"></a>
+									<a class="clearLogo"><i class="fa fa-close"></i>清除</a>
+								</div>
+							</div>
+							<div class="logo_size">
+								<div class="logo_modify_input"><p>修改长度：</p><input type="text" class="widthCustom" value="<%-logojson.width%>"></div>
+								<div class="logo_modify_input"><p>修改高度：</p><input type="text" class="modify_height" value="<%-logojson.height%>"></div>
+								<div class="logo_modify_input">
+									<p>是否显示：</p>
+									<div class="select_down floatLeft marLeft22">
+										<p class="wid48"><%-logojson.doesShow[1]%><i class="fa fa-caret-down"></i></p>
+										<ol>
+											<li>是</li>
+											<li>否</li>
+										</ol>
+										<input type="hidden" class="doesShow">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="preservation_but"><a>保存</a></div>
+					</div>
+				</div>
+			</div>
+			<div class="operation_panel layout right_number_1">
+				<h3><span>网站名称</span></h3>
+				<div class="out" style="margin:0 6px;">
+					<div class="inner">
+						<div id="picker2"></div>
+						<div class="change_color">
+							<strong><em>文字颜色</em></strong>
+							<p><input type="text" value="<%-titlejson.color%>" class="colorwell2"></p>
+						</div>
+						<div class="logo_set marTop20">
+							<div class="textarea_name">
+								<textarea><%-titlejson.textarea%></textarea>
+							</div>
+							<div class="logo_size">
+								<div class="logo_modify_input">
+									<p>大小：</p>
+									<div class="select_down floatLeft marLeft10">
+										<p class="wid88"><%-titlejson.fontSize%><i class="fa fa-caret-down"></i></p>
+										<ol class="size_f">
+											<li>18</li>
+											<li>19</li>
+											<li>20</li>
+											<li>21</li>
+											<li>22</li>
+											<li>23</li>
+											<li>24</li>
+										</ol>
+										<input type="hidden" class="font_size" value="<%-titlejson.fontSize%>">
+									</div>
+								</div>
+								<div class="logo_modify_input">
+									<p>字体：</p>
+									<div class="select_down floatLeft marLeft10">
+										<p class="wid88"><%-titlejson.fontFamily%><i class="fa fa-caret-down"></i></p>
+										<ol class="fam_font">
+											<li>微软雅黑</li>
+											<li>宋体</li>
+											<li>黑体</li>
+										</ol>
+										<input type="hidden" class="font_family" value="<%-titlejson.fontFamily%>">
+									</div>
+								</div>
+								<div class="logo_modify_input">
+									<p>显示：</p>
+									<div class="select_down floatLeft marLeft10">
+										<p class="wid88"><%-titlejson.doesShow[1]%><i class="fa fa-caret-down"></i></p>
+										<ol>
+											<li>是</li>
+											<li>否</li>
+										</ol>
+										<input type="hidden" class="doesShow" value="<%-titlejson.doesShow[1]%>">
+									</div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+					<div class="preservation_but"><a>保存</a></div>
+				</div>
+			</div>
+			<div class="operation_panel layout right_number_2">
+				<h3><span>设置抬头</span></h3>
+				<div class="line_num routine"><a class="on percentage50" tab="0">纯色</a><a class="percentage50" tab="1">图像</a></div>
+				<div class="line_con" style="width:508px;right:0;">
+					<div class="out" style="margin-top:10px;">
+						<div class="inner" style="width:194px;">
+							<div class="pad_10">
+								<div>
+									<div id="picker3"></div>
+									<div class="change_color">
+										<strong><em>主色</em></strong>
+										<p><input type="text" value="<%-bannerjson.color%>" class="colorwell3" style="background-color:#983380;"></p>
+									</div>
+									<div class="logo_set marTop20 wid70_p pad_0">
+										<div class="logo_size">
+											<div class="logo_modify_input">
+												<p>规格：</p>
+												<div class="select_down floatLeft marLeft10">
+													<p class="wid48"><%-bannerjson.widthSize%><i class="fa fa-caret-down"></i></p>
+													<ol>
+														<li>宽屏</li>
+														<li>窄屏</li>
+													</ol>
+													<input type="hidden" value="窄屏">
+												</div>
+											</div>
+											<div class="logo_modify_input">
+												<p>修改高度：</p>
+												<input type="text" class="marLeft10 modify_height" value="<%-bannerjson.height%>" onkeyup="value=value.replace(/[^\d]/g,'')";>
+											</div>
+											<div class="logo_modify_input">
+												<p>下间距(PX) ：</p>
+												<input type="text" class="marLeft10 modify_marBot" value="<%-bannerjson.marBottom%>" onkeyup="value=value.replace(/[^\d]/g,'')";>
+											</div>
+											<div class="logo_modify_input">
+												<p>是否显示：</p>
+												<div class="select_down floatLeft marLeft10">
+													<p class="wid48"><%-bannerjson.doesShow[1]%><i class="fa fa-caret-down"></i></p>
+													<ol>
+														<li>是</li>
+														<li>否</li>
+													</ol>
+													<input type="hidden" value="是" class="doesShow">
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="preservation_but"><a>保存</a></div>
+							</div>
+						</div>
+					</div>
+					<div class="out">
+						<div class="inner" style="width:194px;">
+							<div class="logo_set">
+								<div class="up_img padd_7">
+									<div class="show_img"><i class="fa fa-camera"></i></div>
+									<div class="up_but"><a href="" class="upload"><i class="fa fa-camera"></i>上传<input type="file"></a><a href="" class="eliminate"><i class="fa fa-times"></i>清除</a></div>
+								</div>
+								<div class="bg_position marTop20">
+									<h3><span class="bg_283c50">背景位置</span></h3>
+									<div class="location_sele">
+										<a class="posi_top on"><em></em><input type="radio" name="bj_img_posi" checked></a>
+										<a class="posi_middle"><em></em><input type="radio" name="bj_img_posi"></a>
+										<a class="posi_bottom"><em></em><input type="radio" name="bj_img_posi"></a>
+									</div>
+								</div>
+
+								<div class="logo_set marTop20 wid70_p pad_0">
+									<div class="logo_size">
+										<div class="logo_modify_input">
+											<p>规格：</p>
+											<div class="select_down floatLeft marLeft10">
+												<p class="wid48">宽屏<i class="fa fa-caret-down"></i></p>
+												<ol>
+													<li>宽屏</li>
+													<li>窄屏</li>
+												</ol>
+												<input type="hidden" value="宽屏">
+											</div>
+										</div>
+										<div class="logo_modify_input">
+											<p>修改高度：</p>
+											<input type="text" class="marLeft10" onkeyup="value=value.replace(/[^\d]/g,'')";>
+										</div>
+										<div class="logo_modify_input">
+											<p>下间距(PX) ：</p>
+											<input type="text" class="marLeft10" onkeyup="value=value.replace(/[^\d]/g,'')";>
+										</div>
+										<div class="logo_modify_input">
+											<p>是否显示：</p>
+											<div class="select_down floatLeft marLeft10">
+												<p class="wid48">是<i class="fa fa-caret-down"></i></p>
+												<ol>
+													<li>是</li>
+													<li>否</li>
+												</ol>
+												<input type="hidden" value="是">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="preservation_but"><a href="">保存</a></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="operation_panel layout right_number_3">
+				<h3><span>底部设置</span></h3>
+				<div class="line_num routine"><a class="on percentage50" tab="0">纯色</a><a class="percentage50" tab="1">图像</a></div>
+				<div class="line_con" style="width:508px;right:0;">
+					<div class="out" style="margin-top:10px;">
+						<div class="inner" style="width:194px;">
+							<div class="pad_10">
+								<div>
+									<div id="picker4"></div>
+									<div class="change_color">
+										<strong><em>主色</em></strong>
+										<p><input type="text" value="<%-footjson.color%>" class="colorwell4"></p>
+									</div>
+									<div class="logo_set marTop20 wid70_p pad_0">
+										<div class="logo_size">
+											<div class="logo_modify_input">
+												<p>规格：</p>
+												<div class="select_down floatLeft marLeft10">
+													<p class="wid48"><%-footjson.widthSize%><i class="fa fa-caret-down"></i></p>
+													<ol>
+														<li>宽屏</li>
+														<li>窄屏</li>
+													</ol>
+													<input type="hidden" value="<%-footjson.widthSize%>">
+												</div>
+											</div>
+											<div class="logo_modify_input">
+												<p>修改高度：</p>
+												<input type="text" class="marLeft10 modify_height" value="<%-footjson.height%>" onkeyup="value=value.replace(/[^\d]/g,'')";>
+											</div>
+											<div class="logo_modify_input">
+												<p>上间距(PX) ：</p>
+												<input type="text" class="marLeft10 modify_marTop" value="<%-footjson.marTop%>" onkeyup="value=value.replace(/[^\d]/g,'')";>
+											</div>
+											<div class="logo_modify_input">
+												<p>是否显示：</p>
+												<div class="select_down floatLeft marLeft10">
+													<p class="wid48"><%-footjson.doesShow[1]%><i class="fa fa-caret-down"></i></p>
+													<ol>
+														<li>是</li>
+														<li>否</li>
+													</ol>
+													<input type="hidden" value="是" class="doesShow">
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="preservation_but"><a>保存</a></div>
+							</div>
+						</div>
+					</div>
+					<div class="out">
+						<div class="inner" style="width:194px;">
+							<div class="logo_set">
+								<div class="up_img padd_7">
+									<div class="show_img"><i class="fa fa-camera"></i></div>
+									<div class="up_but"><a href="" class="upload"><i class="fa fa-camera"></i>上传<input type="file"></a><a href="" class="eliminate"><i class="fa fa-times"></i>清除</a></div>
+								</div>
+								<div class="bg_position marTop20">
+									<h3><span class="bg_283c50">背景位置</span></h3>
+									<div class="location_sele">
+										<a class="posi_top on"><em></em><input type="radio" name="bj_img_posi" checked></a>
+										<a class="posi_middle"><em></em><input type="radio" name="bj_img_posi"></a>
+										<a class="posi_bottom"><em></em><input type="radio" name="bj_img_posi"></a>
+									</div>
+								</div>
+
+								<div class="logo_set marTop20 wid70_p pad_0">
+									<div class="logo_size">
+										<div class="logo_modify_input">
+											<p>规格：</p>
+											<div class="select_down floatLeft marLeft10">
+												<p class="wid48">宽屏<i class="fa fa-caret-down"></i></p>
+												<ol>
+													<li>宽屏</li>
+													<li>窄屏</li>
+												</ol>
+												<input type="hidden" value="宽屏">
+											</div>
+										</div>
+										<div class="logo_modify_input">
+											<p>修改高度：</p>
+											<input type="text" class="marLeft10" onkeyup="value=value.replace(/[^\d]/g,'')";>
+										</div>
+										<div class="logo_modify_input">
+											<p>下间距(PX) ：</p>
+											<input type="text" class="marLeft10" onkeyup="value=value.replace(/[^\d]/g,'')";>
+										</div>
+										<div class="logo_modify_input">
+											<p>是否显示：</p>
+											<div class="select_down floatLeft marLeft10">
+												<p class="wid48">是<i class="fa fa-caret-down"></i></p>
+												<ol>
+													<li>是</li>
+													<li>否</li>
+												</ol>
+												<input type="hidden" value="是">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="preservation_but"><a href="">保存</a></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="operation_panel layout right_number_4">
+				<h3><span>选择模块</span></h3>
+				<div class="sel_module">
+<!-- 					<table>
+						<tr>
+							<td>简介</td>
+							<td>新闻</td>
+							<td>会员</td>
+							<td>活动</td>
+						</tr>
+						<tr>
+							<td>圈子</td>
+							<td>捐赠</td>
+							<td>文库</td>
+							<td>问卷</td>
+						</tr>
+						<tr>
+							<td colspan="2">帮帮忙</td>
+							<td colspan="2">资源对接</td>
+						</tr>
+						<tr>
+							<td colspan="2">电子期刊</td>
+							<td colspan="2">共用库</td>
+						</tr>
+					</table> -->
+					<div class="module_con" style="margin:0px;">
+<!-- 						<div class="mod_tit">
+							<p class="mod_name"><i></i>圈子</p>
+							<p class="angle_up"><a href=""><i class="fa fa-angle-up"></i></a></p>
+						</div> -->
+						<div class="mod_set out" id="a8" style="height:850px;">
+							<div id="b8">
+								<div class="mod_all" style="color:#fff;">
+
+								</div>
+<!-- 								<div class="typesetting">
+									<p>排版方式</p>
+									<div class="type_t_p">
+										<a href="" class="t_img">
+											<label>
+												<img src="images/text.png">
+												<span>文字列表</span>
+												<input type="radio" name="t_p" checked>
+												<em></em>
+											</label>
+										</a>
+										<a href="" class="p_img">
+											<label>
+												<img src="images/pic.png">
+												<span>图文列表</span>
+												<input type="radio" name="t_p">
+												<em></em>
+											</label>
+										</a>
+									</div>
+								</div>
+								<div>
+									<div id="picker7"></div>
+									<div class="change_color">
+										<strong><em>当前背景色</em></strong>
+										<p><input type="text" value="#983380" class="colorwell7" style="background-color:#983380;"></p>
+									</div>
+									<div class="change_color">
+										<strong><em>当前文字色</em></strong>
+										<p><input type="text" value="#000" class="colorwell7" style="background-color:#983380;"></p>
+									</div>
+								</div> -->
+								<div class="mod_but"><a>确定添加</a></div>
+							</div>
+							<div class="scrollbar" id="d8">
+								<div class="scrollbtn" id="c8"></div>
+							</div>
+						</div>	
+					</div>
+				</div>
+			
+			</div>
+			<div class="operation_panel layout right_number_5">
+				<h3><span>顶部设置</span></h3>
+				<div class="line_num routine"><a class="on percentage50" tab="0">纯色</a><a class="percentage50" tab="1">图像</a></div>
+				<div class="line_con" style="width:508px;right:0;">
+					<div class="out" style="margin-top:10px;">
+						<div class="inner" style="width:194px;">
+							<div class="pad_10">
+								<div>
+									<div id="picker5"></div>
+									<div class="change_color">
+										<strong><em>主色</em></strong>
+										<p><input type="text" value="<%-topjson.color%>" class="colorwell5" style="background-color:#983380;"></p>
+									</div>
+									<div class="logo_set marTop20 wid70_p pad_0">
+										<div class="logo_size">
+											<div class="logo_modify_input">
+												<p>规格：</p>
+												<div class="select_down floatLeft marLeft10">
+													<p class="wid48"><%-topjson.widthSize%><i class="fa fa-caret-down"></i></p>
+													<ol>
+														<li>宽屏</li>
+														<li>窄屏</li>
+													</ol>
+													<input type="hidden" value="窄屏">
+												</div>
+											</div>
+											<div class="logo_modify_input">
+												<p>修改高度：</p>
+												<input type="text" class="marLeft10 modify_height" value="<%-topjson.height%>" onkeyup="value=value.replace(/[^\d]/g,'')";>
+											</div>
+											<div class="logo_modify_input">
+												<p>下间距(PX) ：</p>
+												<input type="text" class="marLeft10 modify_marBot" value="<%-topjson.marBottom%>" onkeyup="value=value.replace(/[^\d]/g,'')";>
+											</div>
+											<div class="logo_modify_input">
+												<p>是否显示：</p>
+												<div class="select_down floatLeft marLeft10">
+													<p class="wid48"><%-topjson.doesShow[1]%><i class="fa fa-caret-down"></i></p>
+													<ol>
+														<li>是</li>
+														<li>否</li>
+													</ol>
+													<input type="hidden" value="是" class="doesShow">
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="preservation_but"><a>保存</a></div>
+							</div>
+						</div>
+					</div>
+					<div class="out">
+						<div class="inner" style="width:194px;">
+							<div class="logo_set">
+								<div class="up_img padd_7">
+									<div class="show_img"><i class="fa fa-camera"></i></div>
+									<div class="up_but"><a href="" class="upload"><i class="fa fa-camera"></i>上传<input type="file"></a><a href="" class="eliminate"><i class="fa fa-times"></i>清除</a></div>
+								</div>
+								<div class="bg_position marTop20">
+									<h3><span class="bg_283c50">背景位置</span></h3>
+									<div class="location_sele">
+										<a class="posi_top on"><em></em><input type="radio" name="bj_img_posi" checked></a>
+										<a class="posi_middle"><em></em><input type="radio" name="bj_img_posi"></a>
+										<a class="posi_bottom"><em></em><input type="radio" name="bj_img_posi"></a>
+									</div>
+								</div>
+
+								<div class="logo_set marTop20 wid70_p pad_0">
+									<div class="logo_size">
+										<div class="logo_modify_input">
+											<p>规格：</p>
+											<div class="select_down floatLeft marLeft10">
+												<p class="wid48">宽屏<i class="fa fa-caret-down"></i></p>
+												<ol>
+													<li>宽屏</li>
+													<li>窄屏</li>
+												</ol>
+												<input type="hidden" value="宽屏">
+											</div>
+										</div>
+										<div class="logo_modify_input">
+											<p>修改高度：</p>
+											<input type="text" class="marLeft10" onkeyup="value=value.replace(/[^\d]/g,'')";>
+										</div>
+										<div class="logo_modify_input">
+											<p>下间距(PX) ：</p>
+											<input type="text" class="marLeft10" onkeyup="value=value.replace(/[^\d]/g,'')";>
+										</div>
+										<div class="logo_modify_input">
+											<p>是否显示：</p>
+											<div class="select_down floatLeft marLeft10">
+												<p class="wid48">是<i class="fa fa-caret-down"></i></p>
+												<ol>
+													<li>是</li>
+													<li>否</li>
+												</ol>
+												<input type="hidden" value="是">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="preservation_but"><a href="">保存</a></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="operation_panel layout right_number_6">
+				<h3><span>轮播图设置</span></h3>
+				<div class="line_num routine"><a class="on percentage50" tab="0">纯色</a><a class="percentage50" tab="1">图像</a></div>
+				<div class="line_con" style="width:508px;right:0;">
+					<div class="out" style="margin-top:10px;">
+						<div class="inner" style="width:194px;">
+							<div class="pad_10">
+								<div>
+									<div id="picker6"></div>
+									<div class="change_color">
+										<strong><em>主色</em></strong>
+										<p><input type="text" value="#000" class="colorwell6" style="background-color:#983380;"></p>
+									</div>
+									<div class="logo_set marTop20 wid70_p pad_0">
+										<div class="logo_size">
+											<div class="logo_modify_input">
+												<p>规格：</p>
+												<div class="select_down floatLeft marLeft10">
+													<p class="wid48"><%-slidejson.widthSize%><i class="fa fa-caret-down"></i></p>
+													<ol>
+														<li>宽屏</li>
+														<li>窄屏</li>
+													</ol>
+													<input type="hidden" value="<%-slidejson.widthSize%>">
+												</div>
+											</div>
+											<div class="logo_modify_input">
+												<p>修改高度：</p>
+												<input type="text" class="marLeft10 modify_height" value="<%-slidejson.height%>" onkeyup="value=value.replace(/[^\d]/g,'')";>
+											</div>
+											<div class="logo_modify_input">
+												<p>上间距(PX) ：</p>
+												<input type="text" class="marLeft10 modify_marTop" value="<%-slidejson.marTop%>" onkeyup="value=value.replace(/[^\d]/g,'')";>
+											</div>
+											<div class="logo_modify_input">
+												<p>下间距(PX) ：</p>
+												<input type="text" class="marLeft10 modify_marBot" value="<%-slidejson.marBottom%>" onkeyup="value=value.replace(/[^\d]/g,'')";>
+											</div>
+											<div class="logo_modify_input">
+												<p>模块显示：</p>
+												<div class="select_down floatLeft marLeft10">
+													<p class="wid48"><%-slidejson.doesShow[1]%><i class="fa fa-caret-down"></i></p>
+													<ol>
+														<li>是</li>
+														<li>否</li>
+													</ol>
+													<input type="hidden" value="<%-slidejson.doesShow[1]%>" class="doesShow">
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="preservation_but"><a>保存</a></div>
+							</div>
+						</div>
+					</div>
+					<div class="out">
+						<div class="inner" style="width:194px;">
+							<div class="logo_set">
+								<div class="up_img padd_7">
+									<div class="show_img"><i class="fa fa-camera"></i></div>
+									<div class="up_but"><a href="" class="upload"><i class="fa fa-camera"></i>上传<input type="file"></a><a href="" class="eliminate"><i class="fa fa-times"></i>清除</a></div>
+								</div>
+								<div class="bg_position marTop20">
+									<h3><span class="bg_283c50">背景位置</span></h3>
+									<div class="location_sele">
+										<a class="posi_top on"><em></em><input type="radio" name="bj_img_posi" checked></a>
+										<a class="posi_middle"><em></em><input type="radio" name="bj_img_posi"></a>
+										<a class="posi_bottom"><em></em><input type="radio" name="bj_img_posi"></a>
+									</div>
+								</div>
+
+								<div class="logo_set marTop20 wid70_p pad_0">
+									<div class="logo_size">
+										<div class="logo_modify_input">
+											<p>规格：</p>
+											<div class="select_down floatLeft marLeft10">
+												<p class="wid48"><%-slidejson.widthSize%><i class="fa fa-caret-down"></i></p>
+												<ol>
+													<li>宽屏</li>
+													<li>窄屏</li>
+												</ol>
+												<input type="hidden" value="<%-slidejson.widthSize%>">
+											</div>
+										</div>
+										<div class="logo_modify_input">
+											<p>修改高度：</p>
+											<input type="text" class="marLeft10 modify_height" value="<%-slidejson.height%>" onkeyup="value=value.replace(/[^\d]/g,'')";>
+										</div>
+										<div class="logo_modify_input">
+											<p>上间距(PX) ：</p>
+											<input type="text" class="marLeft10 modify_marTop" value="<%-slidejson.marTop%>" onkeyup="value=value.replace(/[^\d]/g,'')";>
+										</div>
+										<div class="logo_modify_input">
+											<p>下间距(PX) ：</p>
+											<input type="text" class="marLeft10 modify_marBot" value="<%-slidejson.marBottom%>" onkeyup="value=value.replace(/[^\d]/g,'')";>
+										</div>
+										<div class="logo_modify_input">
+											<p>模块显示：</p>
+											<div class="select_down floatLeft marLeft10">
+												<p class="wid48"><%-slidejson.doesShow[1]%><i class="fa fa-caret-down"></i></p>
+												<ol>
+													<li>是</li>
+													<li>否</li>
+												</ol>
+												<input type="hidden" value="<%-slidejson.doesShow[1]%>" class="doesShow">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="preservation_but"><a href="">保存</a></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="operation_panel beautify right_number_7" id="" style="padding:0 6px 0 20px;display:block;">
+				<h3><span>美化效果</span></h3>
+				<div class="line_num"><a class="on" tab="0">外观</a><a tab="1">推荐</a></div>
+				<div class="line_con" style="width:508px;left:0;">
+					<div class="out" id="a8">
+						<div class="inner" id="b8">
+							<div>
+								<div id="picker8"></div>
+								<div class="change_color">
+									<strong><em>主色</em></strong>
+									<p>
+										<input type="text" value="<%-commonjson.pageColor.mainColor%>" class="colorwell color_radio_0" id="mainColor">
+									</p>
+								</div>
+								<div class="change_color">
+									<strong><em>副色</em></strong>
+									<p>
+										<input type="text" value="<%-commonjson.pageColor.deputyColor%>" class="colorwell color_radio_1" id="deputyColor">
+									</p>
+								</div>
+								<div class="change_color">
+									<strong><em>栏目颜色</em></strong>
+									<p>
+										<input type="text" value="<%-commonjson.pageColor.columnColor%>" class="colorwell color_radio_2" id="columnColor">
+									</p>
+								</div>
+								<div class="change_color">
+									<strong><em>栏目文字</em></strong>
+									<p>
+										<input type="text" value="<%-commonjson.pageColor.textColor%>" class="colorwell color_radio_3" id="textColor">
+									</p>
+								</div>
+								<div class="change_color bg_set">
+									<div class="bg_color_img"><a class="on">背景颜色</a><a>背景图片</a></div>
+									<div class="bg_style">
+										<p>
+											<input type="text" value="<%-commonjson.pageColor.backgroundColor%>" class="colorwell color_radio_4" id="backgroundColor">
+										</p>
+									</div>
+									<div class="bg_style bgStyle_set">
+										<div class="up_img">
+											<div class="show_img"><i class="fa fa-camera"></i></div>
+											<div class="up_but"><a href="" class="upload"><i class="fa fa-camera"></i>上传<input type="file"></a><a href="" class="eliminate"><i class="fa fa-times"></i>清除</a></div>
+										</div>
+										<div class="bg_position">
+											<h3><span>背景位置</span></h3>
+											<div class="location_sele">
+												<a class="posi_top on"><em></em><input type="radio" name="bj_img_posi" checked></a>
+												<a class="posi_middle"><em></em><input type="radio" name="bj_img_posi"></a>
+												<a class="posi_bottom"><em></em><input type="radio" name="bj_img_posi"></a>
+											</div>
+										</div>
+										<div class="repeat">
+											<span><em>不重复</em><i class="fa fa-sort-down"></i></span>
+											<ul>
+												<li><a>不重复</a></li>
+												<li><a>水平方向重复</a></li>
+												<li><a>垂直方向重复</a></li>
+												<li><a>填充</a></li>
+											</ul>
+											<input type="hidden" value="不重复">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+				        <div class="scrollbar" id="d8">
+				            <div class="scrollbtn" id="c8"></div>
+				        </div>
+					</div>
+					<div class="out" id="a2">
+						<div class="inner" id="b2">
+							<div class="main_vice">
+								<ul>
+									<li>
+										<label class="on" frontView="#2b2e4a" backgroundColor="#903749">
+											<div class="color_block">
+												<span class="c_2b2e4a"></span>
+												<span class="c_903749"></span>
+											</div>
+											<div class="color_checked">
+												<em>使用中</em>
+												<i class="fa fa-check-circle"></i>
+											</div>
+											<input type="radio" name="color_sel" checked>
+										</label>
+									</li>
+									<li>
+										<label frontView="#38817a" backgroundColor="#56bfb5">
+											<div class="color_block">
+												<span class="c_38817a"></span>
+												<span class="c_56bfb5"></span>
+											</div>
+											<input type="radio" name="color_sel">
+											<div class="color_checked">
+												<i class="fa fa-check-circle"></i>
+											</div>
+										</label>
+									</li>
+									<li>
+										<label frontView="#484cb0" backgroundColor="#526ed0">
+											<div class="color_block">
+												<span class="c_484cb0"></span>
+												<span class="c_526ed0"></span>
+											</div>
+											<input type="radio" name="color_sel">
+											<div class="color_checked">
+												<i class="fa fa-check-circle"></i>
+											</div>
+										</label>
+									</li>
+									<li>
+										<label frontView="#655989" backgroundColor="#de88a5">
+											<div class="color_block">
+												<span class="c_655989"></span>
+												<span class="c_de88a5"></span>
+											</div>
+											<input type="radio" name="color_sel">
+											<div class="color_checked">
+												<i class="fa fa-check-circle"></i>
+											</div>
+										</label>
+									</li>
+									<li>
+										<label frontView="#222831" backgroundColor="#393e46">
+											<div class="color_block">
+												<span class="c_222831"></span>
+												<span class="c_393e46"></span>
+											</div>
+											<input type="radio" name="color_sel">
+											<div class="color_checked">
+												<i class="fa fa-check-circle"></i>
+											</div>
+										</label>
+									</li>
+									<li>
+										<label frontView="#5e1043" backgroundColor="#a13f80">
+											<div class="color_block">
+												<span class="c_5e1043"></span>
+												<span class="c_a13f80"></span>
+											</div>
+											<input type="radio" name="color_sel">
+											<div class="color_checked">
+												<i class="fa fa-check-circle"></i>
+											</div>
+										</label>
+									</li>
+									<li>
+										<label frontView="#c83b4c" backgroundColor="#f75b5b">
+											<div class="color_block">
+												<span class="c_c83b4c"></span>
+												<span class="c_f75b5b"></span>
+											</div>
+											<input type="radio" name="color_sel">
+											<div class="color_checked">
+												<i class="fa fa-check-circle"></i>
+											</div>
+										</label>
+									</li>
+									<li>
+										<label frontView="#1a2634" backgroundColor="#203e5f">
+											<div class="color_block">
+												<span class="c_1a2634"></span>
+												<span class="c_203e5f"></span>
+											</div>
+											<input type="radio" name="color_sel">
+											<div class="color_checked">
+												<i class="fa fa-check-circle"></i>
+											</div>
+										</label>
+									</li>
+									<li>
+										<label frontView="#b42b3f" backgroundColor="#e42f45">
+											<div class="color_block">
+												<span class="c_b42b3f"></span>
+												<span class="c_e42f45"></span>
+											</div>
+											<input type="radio" name="color_sel">
+											<div class="color_checked">
+												<i class="fa fa-check-circle"></i>
+											</div>
+										</label>
+									</li>
+									<li>
+										<label frontView="#a66d53" backgroundColor="#c98c70">
+											<div class="color_block">
+												<span class="c_a66d53"></span>
+												<span class="c_c98c70"></span>
+											</div>
+											<input type="radio" name="color_sel">
+											<div class="color_checked">
+												<i class="fa fa-check-circle"></i>
+											</div>
+										</label>
+									</li>
+									<li>
+										<label frontView="#3f4c48" backgroundColor="#95977a">
+											<div class="color_block">
+												<span class="c_3f4c48"></span>
+												<span class="c_95977a"></span>
+											</div>
+											<input type="radio" name="color_sel">
+											<div class="color_checked">
+												<i class="fa fa-check-circle"></i>
+											</div>
+										</label>
+									</li>
+									<li>
+										<label frontView="#062c80" backgroundColor="#0e6ac7">
+											<div class="color_block">
+												<span class="c_062c80"></span>
+												<span class="c_0e6ac7"></span>
+											</div>
+											<input type="radio" name="color_sel">
+											<div class="color_checked">
+												<i class="fa fa-check-circle"></i>
+											</div>
+										</label>
+									</li>
+									<li>
+										<label frontView="#46265c" backgroundColor="#794d9a">
+											<div class="color_block">
+												<span class="c_46265c"></span>
+												<span class="c_794d9a"></span>
+											</div>
+											<input type="radio" name="color_sel">
+											<div class="color_checked">
+												<i class="fa fa-check-circle"></i>
+											</div>
+										</label>
+									</li>
+									<li>
+										<label frontView="#543d46" backgroundColor="#5da7ae">
+											<div class="color_block">
+												<span class="c_543d46"></span>
+												<span class="c_5da7ae"></span>
+											</div>
+											<input type="radio" name="color_sel">
+											<div class="color_checked">
+												<i class="fa fa-check-circle"></i>
+											</div>
+										</label>
+									</li>
+									<li>
+										<label frontView="#8d0033" backgroundColor="#bd3246">
+											<div class="color_block">
+												<span class="c_8d0033"></span>
+												<span class="c_bd3246"></span>
+											</div>
+											<input type="radio" name="color_sel">
+											<div class="color_checked">
+												<i class="fa fa-check-circle"></i>
+											</div>
+										</label>
+									</li>
+									<li>
+										<label frontView="#2f2342" backgroundColor="#e42f45">
+											<div class="color_block">
+												<span class="c_2f2342"></span>
+												<span class="c_e42f45"></span>
+											</div>
+											<input type="radio" name="color_sel">
+											<div class="color_checked">
+												<i class="fa fa-check-circle"></i>
+											</div>
+										</label>
+									</li>
+									<li>
+										<label frontView="#6f3826" backgroundColor="#b84a39">
+											<div class="color_block">
+												<span class="c_6f3826"></span>
+												<span class="c_b84a39"></span>
+											</div>
+											<input type="radio" name="color_sel">
+											<div class="color_checked">
+												<i class="fa fa-check-circle"></i>
+											</div>
+										</label>
+									</li>
+									<li>
+										<label frontView="#333a7b" backgroundColor="#4b6982">
+											<div class="color_block">
+												<span class="c_333a7b"></span>
+												<span class="c_4b6982"></span>
+											</div>
+											<input type="radio" name="color_sel">
+											<div class="color_checked">
+												<i class="fa fa-check-circle"></i>
+											</div>
+										</label>
+									</li>
+									<li>
+										<label frontView="#266352" backgroundColor="#128061">
+											<div class="color_block">
+												<span class="c_266352"></span>
+												<span class="c_128061"></span>
+											</div>
+											<input type="radio" name="color_sel">
+											<div class="color_checked">
+												<i class="fa fa-check-circle"></i>
+											</div>
+										</label>
+									</li>
+									<li>
+										<label frontView="#0c3c78" backgroundColor="#04879c">
+											<div class="color_block">
+												<span class="c_0c3c78"></span>
+												<span class="c_04879c"></span>
+											</div>
+											<input type="radio" name="color_sel">
+											<div class="color_checked">
+												<i class="fa fa-check-circle"></i>
+											</div>
+										</label>
+									</li>
+									<li>
+										<label frontView="#0066cc" backgroundColor="#0099ff">
+											<div class="color_block">
+												<span class="c_0066cc"></span>
+												<span class="c_0099ff"></span>
+											</div>
+											<input type="radio" name="color_sel">
+											<div class="color_checked">
+												<i class="fa fa-check-circle"></i>
+											</div>
+										</label>
+									</li>
+									<li>
+										<label frontView="#634258" backgroundColor="#6d6087">
+											<div class="color_block">
+												<span class="c_634258"></span>
+												<span class="c_6d6087"></span>
+											</div>
+											<input type="radio" name="color_sel">
+											<div class="color_checked">
+												<i class="fa fa-check-circle"></i>
+											</div>
+										</label>
+									</li>
+									<li>
+										<label frontView="#314357" backgroundColor="#456672">
+											<div class="color_block">
+												<span class="c_314357"></span>
+												<span class="c_456672"></span>
+											</div>
+											<input type="radio" name="color_sel">
+											<div class="color_checked">
+												<i class="fa fa-check-circle"></i>
+											</div>
+										</label>
+									</li>
+									<li>
+										<label frontView="#083d56" backgroundColor="#0e5f76">
+											<div class="color_block">
+												<span class="c_083d56"></span>
+												<span class="c_0e5f76"></span>
+											</div>
+											<input type="radio" name="color_sel">
+											<div class="color_checked">
+												<i class="fa fa-check-circle"></i>
+											</div>
+										</label>
+									</li>
+									<li>
+										<label frontView="#303242" backgroundColor="#394359">
+											<div class="color_block">
+												<span class="c_303242"></span>
+												<span class="c_394359"></span>
+											</div>
+											<input type="radio" name="color_sel">
+											<div class="color_checked">
+												<i class="fa fa-check-circle"></i>
+											</div>
+										</label>
+									</li>
+									<li>
+										<label frontView="#504077" backgroundColor="#924992">
+											<div class="color_block">
+												<span class="c_504077"></span>
+												<span class="c_924992"></span>
+											</div>
+											<input type="radio" name="color_sel">
+											<div class="color_checked">
+												<i class="fa fa-check-circle"></i>
+											</div>
+										</label>
+									</li>
+									<li>
+										<label frontView="#cd4439" backgroundColor="#72b896">
+											<div class="color_block">
+												<span class="c_cd4439"></span>
+												<span class="c_72b896"></span>
+											</div>
+											<input type="radio" name="color_sel">
+											<div class="color_checked">
+												<i class="fa fa-check-circle"></i>
+											</div>
+										</label>
+									</li>
+
+								</ul>
+							</div>
+
+
+						</div>
+						<div class="scrollbar" id="d2">
+							<div class="scrollbtn" id="c2"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="all_layout">
+			<div class="wra_lay">
+				<!-- 选择布局面板 -->
+				<div class="operation_panel layout" id="layout">
+					<h3><span>选择布局</span></h3>
+					<div class="line_num padd0"><a class="on" tab="0">一行</a><a tab="1">二行</a><a href="">三行</a></div>
+					<div class="line_con" style="width:508px;">
+						<div class="out" id="a5">
+							<div class="inner" id="b5">
+								<div class="padd_bot_20">
+									<ul>
+										<li>
+											<table>
+												<tr><td class="proportion c_c4ddff"></td></tr>
+											</table>
+											<p><span><i class="fa fa-plus"></i></span></p>
+										</li>
+										<li>
+											<table>
+												<tr><td class="proportion_2_1 c_75b0fe"></td><td class="proportion_2_2 c_c4ddff"></td></tr>
+											</table>
+											<p><span><i class="fa fa-plus"></i></span></p>
+										</li>
+										<li>
+											<table>
+												<tr><td class="proportion_3_1 c_c4ddff"></td><td class="proportion_3_2 c_75b0fe"></td><td class="proportion_3_3 c_c4ddff"></td></tr>
+											</table>
+											<p><span><i class="fa fa-plus"></i></span></p>
+										</li>
+										<li>
+											<table>
+												<tr><td class="proportion_4_1 c_c4ddff"></td><td class="proportion_4_2 c_75b0fe"></td><td class="proportion_4_3 c_c4ddff"></td></tr>
+											</table>
+											<p><span><i class="fa fa-plus"></i></span></p>
+										</li>
+										<li>
+											<table>
+												<tr><td class="proportion_5_1 c_75b0fe"></td><td class="proportion_5_2 c_c4ddff"></td></tr>
+											</table>
+											<p><span><i class="fa fa-plus"></i></span></p>
+										</li>
+										<li>
+											<table>
+												<tr><td class="proportion_6_1 c_75b0fe"></td><td class="proportion_6_2 c_c4ddff"></td></tr>
+											</table>
+											<p><span><i class="fa fa-plus"></i></span></p>
+										</li>
+									</ul>
+								</div>
+							</div>
+					        <div class="scrollbar" id="d5">
+					            <div class="scrollbtn" id="c5"></div>
+					        </div>
+						</div>
+						<div class="out" id="a6">
+							<div class="inner" id="b6">
+								<div class="padd_bot_20">
+									
+									<ul>
+										<li class="typesetting_alert" idname="#sec_line_0">
+											<table>
+												<tr><td class="proportion_2_1 c_75b0fe"></td><td class="proportion_2_2 c_c4ddff"></td></tr>
+												<tr><td class="proportion_2_1 c_75b0fe borTop10"></td><td class="proportion_2_2 c_c4ddff borTop10"></td></tr>
+											</table>
+										</li>
+										<li class="typesetting_alert" idname="#sec_line_1">
+											<table>
+												<tr>
+													<td class="proportion_4_1 c_c4ddff" rowspan="2"></td>
+													<td class="proportion_4_2 c_75b0fe" rowspan="2"></td>
+													<td class="proportion_4_3 c_c4ddff"></td>
+												</tr>
+												<tr>
+													<td class="proportion_4_3 c_c4ddff borTop10"></td>
+												</tr>
+											</table>
+										</li>
+										<li class="typesetting_alert" idname="#sec_line_2">
+											<table>
+												<tr><td class="proportion_5_1 c_c4ddff" rowspan="2"></td><td class="proportion_5_2 c_75b0fe"></td></tr>
+												<tr><td class="proportion_5_2 c_75b0fe borTop10"></td></tr>
+											</table>
+										</li>
+									</ul>
+								</div>
+							</div>
+					        <div class="scrollbar" id="d6">
+					            <div class="scrollbtn" id="c6"></div>
+					        </div>
+						</div>
+					</div>
+
+				</div>
+				<!-- 美化效果面板 -->
+				<div class="operation_panel beautify" id="beautify" style="padding:0 6px 0 20px;">
+					<h3><span>美化效果</span></h3>
+					<div class="line_num"><a class="on" tab="0">外观</a><a tab="1">推荐</a></div>
+					<div class="line_con" style="width:508px;left:0;">
+						<div class="out" id="a1">
+							<div class="inner" id="b1">
+								<div>
+									<div id="picker"></div>
+									<div class="change_color">
+										<strong><em>主色</em></strong>
+										<p>
+											<input type="text" value="<%-commonjson.pageColor.mainColor%>" class="colorwell color_radio_0" id="mainColor">
+										</p>
+									</div>
+									<div class="change_color">
+										<strong><em>副色</em></strong>
+										<p>
+											<input type="text" value="<%-commonjson.pageColor.deputyColor%>" class="colorwell color_radio_1" id="deputyColor">
+										</p>
+									</div>
+									<div class="change_color">
+										<strong><em>栏目颜色</em></strong>
+										<p>
+											<input type="text" value="<%-commonjson.pageColor.columnColor%>" class="colorwell color_radio_2" id="columnColor">
+										</p>
+									</div>
+									<div class="change_color">
+										<strong><em>栏目文字</em></strong>
+										<p>
+											<input type="text" value="<%-commonjson.pageColor.textColor%>" class="colorwell color_radio_3" id="textColor">
+										</p>
+									</div>
+									<div class="change_color bg_set">
+										<div class="bg_color_img"><a class="on">背景颜色</a><a>背景图片</a></div>
+										<div class="bg_style">
+											<p>
+												<input type="text" value="<%-commonjson.pageColor.backgroundColor%>" class="colorwell color_radio_4" id="backgroundColor">
+											</p>
+										</div>
+										<div class="bg_style bgStyle_set">
+											<div class="up_img">
+												<div class="show_img"><i class="fa fa-camera"></i></div>
+												<div class="up_but"><a href="" class="upload"><i class="fa fa-camera"></i>上传<input type="file"></a><a href="" class="eliminate"><i class="fa fa-times"></i>清除</a></div>
+											</div>
+											<div class="bg_position">
+												<h3><span>背景位置</span></h3>
+												<div class="location_sele">
+													<a class="posi_top on"><em></em><input type="radio" name="bj_img_posi" checked></a>
+													<a class="posi_middle"><em></em><input type="radio" name="bj_img_posi"></a>
+													<a class="posi_bottom"><em></em><input type="radio" name="bj_img_posi"></a>
+												</div>
+											</div>
+											<div class="repeat">
+												<span><em>不重复</em><i class="fa fa-sort-down"></i></span>
+												<ul>
+													<li><a>不重复</a></li>
+													<li><a>水平方向重复</a></li>
+													<li><a>垂直方向重复</a></li>
+													<li><a>填充</a></li>
+												</ul>
+												<input type="hidden" value="不重复">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+					        <div class="scrollbar" id="d1">
+					            <div class="scrollbtn" id="c1"></div>
+					        </div>
+						</div>
+						<div class="out" id="a2">
+							<div class="inner" id="b2">
+								<div class="main_vice">
+									<ul>
+										<li>
+											<label class="on" frontView="#2b2e4a" backgroundColor="#903749">
+												<div class="color_block">
+													<span class="c_2b2e4a"></span>
+													<span class="c_903749"></span>
+												</div>
+												<div class="color_checked">
+													<em>使用中</em>
+													<i class="fa fa-check-circle"></i>
+												</div>
+												<input type="radio" name="color_sel" checked>
+											</label>
+										</li>
+										<li>
+											<label frontView="#38817a" backgroundColor="#56bfb5">
+												<div class="color_block">
+													<span class="c_38817a"></span>
+													<span class="c_56bfb5"></span>
+												</div>
+												<input type="radio" name="color_sel">
+												<div class="color_checked">
+													<i class="fa fa-check-circle"></i>
+												</div>
+											</label>
+										</li>
+										<li>
+											<label frontView="#484cb0" backgroundColor="#526ed0">
+												<div class="color_block">
+													<span class="c_484cb0"></span>
+													<span class="c_526ed0"></span>
+												</div>
+												<input type="radio" name="color_sel">
+												<div class="color_checked">
+													<i class="fa fa-check-circle"></i>
+												</div>
+											</label>
+										</li>
+										<li>
+											<label frontView="#655989" backgroundColor="#de88a5">
+												<div class="color_block">
+													<span class="c_655989"></span>
+													<span class="c_de88a5"></span>
+												</div>
+												<input type="radio" name="color_sel">
+												<div class="color_checked">
+													<i class="fa fa-check-circle"></i>
+												</div>
+											</label>
+										</li>
+										<li>
+											<label frontView="#222831" backgroundColor="#393e46">
+												<div class="color_block">
+													<span class="c_222831"></span>
+													<span class="c_393e46"></span>
+												</div>
+												<input type="radio" name="color_sel">
+												<div class="color_checked">
+													<i class="fa fa-check-circle"></i>
+												</div>
+											</label>
+										</li>
+										<li>
+											<label frontView="#5e1043" backgroundColor="#a13f80">
+												<div class="color_block">
+													<span class="c_5e1043"></span>
+													<span class="c_a13f80"></span>
+												</div>
+												<input type="radio" name="color_sel">
+												<div class="color_checked">
+													<i class="fa fa-check-circle"></i>
+												</div>
+											</label>
+										</li>
+										<li>
+											<label frontView="#c83b4c" backgroundColor="#f75b5b">
+												<div class="color_block">
+													<span class="c_c83b4c"></span>
+													<span class="c_f75b5b"></span>
+												</div>
+												<input type="radio" name="color_sel">
+												<div class="color_checked">
+													<i class="fa fa-check-circle"></i>
+												</div>
+											</label>
+										</li>
+										<li>
+											<label frontView="#1a2634" backgroundColor="#203e5f">
+												<div class="color_block">
+													<span class="c_1a2634"></span>
+													<span class="c_203e5f"></span>
+												</div>
+												<input type="radio" name="color_sel">
+												<div class="color_checked">
+													<i class="fa fa-check-circle"></i>
+												</div>
+											</label>
+										</li>
+										<li>
+											<label frontView="#b42b3f" backgroundColor="#e42f45">
+												<div class="color_block">
+													<span class="c_b42b3f"></span>
+													<span class="c_e42f45"></span>
+												</div>
+												<input type="radio" name="color_sel">
+												<div class="color_checked">
+													<i class="fa fa-check-circle"></i>
+												</div>
+											</label>
+										</li>
+										<li>
+											<label frontView="#a66d53" backgroundColor="#c98c70">
+												<div class="color_block">
+													<span class="c_a66d53"></span>
+													<span class="c_c98c70"></span>
+												</div>
+												<input type="radio" name="color_sel">
+												<div class="color_checked">
+													<i class="fa fa-check-circle"></i>
+												</div>
+											</label>
+										</li>
+										<li>
+											<label frontView="#3f4c48" backgroundColor="#95977a">
+												<div class="color_block">
+													<span class="c_3f4c48"></span>
+													<span class="c_95977a"></span>
+												</div>
+												<input type="radio" name="color_sel">
+												<div class="color_checked">
+													<i class="fa fa-check-circle"></i>
+												</div>
+											</label>
+										</li>
+										<li>
+											<label frontView="#062c80" backgroundColor="#0e6ac7">
+												<div class="color_block">
+													<span class="c_062c80"></span>
+													<span class="c_0e6ac7"></span>
+												</div>
+												<input type="radio" name="color_sel">
+												<div class="color_checked">
+													<i class="fa fa-check-circle"></i>
+												</div>
+											</label>
+										</li>
+										<li>
+											<label frontView="#46265c" backgroundColor="#794d9a">
+												<div class="color_block">
+													<span class="c_46265c"></span>
+													<span class="c_794d9a"></span>
+												</div>
+												<input type="radio" name="color_sel">
+												<div class="color_checked">
+													<i class="fa fa-check-circle"></i>
+												</div>
+											</label>
+										</li>
+										<li>
+											<label frontView="#543d46" backgroundColor="#5da7ae">
+												<div class="color_block">
+													<span class="c_543d46"></span>
+													<span class="c_5da7ae"></span>
+												</div>
+												<input type="radio" name="color_sel">
+												<div class="color_checked">
+													<i class="fa fa-check-circle"></i>
+												</div>
+											</label>
+										</li>
+										<li>
+											<label frontView="#8d0033" backgroundColor="#bd3246">
+												<div class="color_block">
+													<span class="c_8d0033"></span>
+													<span class="c_bd3246"></span>
+												</div>
+												<input type="radio" name="color_sel">
+												<div class="color_checked">
+													<i class="fa fa-check-circle"></i>
+												</div>
+											</label>
+										</li>
+										<li>
+											<label frontView="#2f2342" backgroundColor="#e42f45">
+												<div class="color_block">
+													<span class="c_2f2342"></span>
+													<span class="c_e42f45"></span>
+												</div>
+												<input type="radio" name="color_sel">
+												<div class="color_checked">
+													<i class="fa fa-check-circle"></i>
+												</div>
+											</label>
+										</li>
+										<li>
+											<label frontView="#6f3826" backgroundColor="#b84a39">
+												<div class="color_block">
+													<span class="c_6f3826"></span>
+													<span class="c_b84a39"></span>
+												</div>
+												<input type="radio" name="color_sel">
+												<div class="color_checked">
+													<i class="fa fa-check-circle"></i>
+												</div>
+											</label>
+										</li>
+										<li>
+											<label frontView="#333a7b" backgroundColor="#4b6982">
+												<div class="color_block">
+													<span class="c_333a7b"></span>
+													<span class="c_4b6982"></span>
+												</div>
+												<input type="radio" name="color_sel">
+												<div class="color_checked">
+													<i class="fa fa-check-circle"></i>
+												</div>
+											</label>
+										</li>
+										<li>
+											<label frontView="#266352" backgroundColor="#128061">
+												<div class="color_block">
+													<span class="c_266352"></span>
+													<span class="c_128061"></span>
+												</div>
+												<input type="radio" name="color_sel">
+												<div class="color_checked">
+													<i class="fa fa-check-circle"></i>
+												</div>
+											</label>
+										</li>
+										<li>
+											<label frontView="#0c3c78" backgroundColor="#04879c">
+												<div class="color_block">
+													<span class="c_0c3c78"></span>
+													<span class="c_04879c"></span>
+												</div>
+												<input type="radio" name="color_sel">
+												<div class="color_checked">
+													<i class="fa fa-check-circle"></i>
+												</div>
+											</label>
+										</li>
+										<li>
+											<label frontView="#0066cc" backgroundColor="#0099ff">
+												<div class="color_block">
+													<span class="c_0066cc"></span>
+													<span class="c_0099ff"></span>
+												</div>
+												<input type="radio" name="color_sel">
+												<div class="color_checked">
+													<i class="fa fa-check-circle"></i>
+												</div>
+											</label>
+										</li>
+										<li>
+											<label frontView="#634258" backgroundColor="#6d6087">
+												<div class="color_block">
+													<span class="c_634258"></span>
+													<span class="c_6d6087"></span>
+												</div>
+												<input type="radio" name="color_sel">
+												<div class="color_checked">
+													<i class="fa fa-check-circle"></i>
+												</div>
+											</label>
+										</li>
+										<li>
+											<label frontView="#314357" backgroundColor="#456672">
+												<div class="color_block">
+													<span class="c_314357"></span>
+													<span class="c_456672"></span>
+												</div>
+												<input type="radio" name="color_sel">
+												<div class="color_checked">
+													<i class="fa fa-check-circle"></i>
+												</div>
+											</label>
+										</li>
+										<li>
+											<label frontView="#083d56" backgroundColor="#0e5f76">
+												<div class="color_block">
+													<span class="c_083d56"></span>
+													<span class="c_0e5f76"></span>
+												</div>
+												<input type="radio" name="color_sel">
+												<div class="color_checked">
+													<i class="fa fa-check-circle"></i>
+												</div>
+											</label>
+										</li>
+										<li>
+											<label frontView="#303242" backgroundColor="#394359">
+												<div class="color_block">
+													<span class="c_303242"></span>
+													<span class="c_394359"></span>
+												</div>
+												<input type="radio" name="color_sel">
+												<div class="color_checked">
+													<i class="fa fa-check-circle"></i>
+												</div>
+											</label>
+										</li>
+										<li>
+											<label frontView="#504077" backgroundColor="#924992">
+												<div class="color_block">
+													<span class="c_504077"></span>
+													<span class="c_924992"></span>
+												</div>
+												<input type="radio" name="color_sel">
+												<div class="color_checked">
+													<i class="fa fa-check-circle"></i>
+												</div>
+											</label>
+										</li>
+										<li>
+											<label frontView="#cd4439" backgroundColor="#72b896">
+												<div class="color_block">
+													<span class="c_cd4439"></span>
+													<span class="c_72b896"></span>
+												</div>
+												<input type="radio" name="color_sel">
+												<div class="color_checked">
+													<i class="fa fa-check-circle"></i>
+												</div>
+											</label>
+										</li>
+
+									</ul>
+								</div>
+
+
+							</div>
+							<div class="scrollbar" id="d2">
+								<div class="scrollbtn" id="c2"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 弹窗 -->
+	<div class="bg-0">
+		<!-- 顶部导航设置 -->
+		<div class="alert_set al_1">
+			<div class="alert_tit">顶部导航设置</div>
+			<div class="tab_con">
+				<div class="tab_name nav-tabs">
+					<p class="on"><a href="#top_nav_tab_0" data-toggle="tab">栏目</a></p>
+					<p><a href="#top_nav_tab_1" data-toggle="tab">规格</a></p>
+				</div>
+				<div class="tab_info active form_n1" id="top_nav_tab_0">
+					<div>
+						<form action="">
+							<div class="nav_tit_t">
+								<p class="wid110 paddLeft_66">主名</p>
+								<p class="marLeft_20" style="width:114px;">别名</p>
+								<p class="wid126" style="float:right;">子栏目</p>
+							</div>
+							<div id="a4" style="max-height:310px;position:relative;overflow:hidden;">
+								<div class="pdd_30" id="b4">
+									<div class="nav_mod" style="margin-top:0;">
+										<div class="first_level">
+											<div class="ico_nav"><i class="fa fa-lock"></i></div>
+											<div class="choice">
+												<input type="text" readonly value="首页" style="margin:0;background-color:#eee;">
+											</div>
+										</div>
+									</div>
+								    <% for(var i = 0; i < navjson.nav_line.length-1; i++) {%>
+									<div class="nav_mod">
+										<div class="first_level">
+											<div class="ico_nav">
+												<a class="up_line"><i class="fa fa-arrow-up"></i></a>
+												<a class="down_line"><i class="fa fa-arrow-down"></i></a>
+											</div>
+											<div class="choice">
+												<div class="select wid110">
+													<p><%-navjson.nav_line[i+1].name%><i class="fa fa-caret-down"></i></p>
+													<ol>
+														<li>
+															<dl>
+																<dt>-- 请选择 --</dt>
+															</dl>
+														</li>
+														<li>
+															<dl>
+																<dt>简介</dt>
+																<dd>简介2</dd>
+															</dl>
+														</li>
+														<li>
+															<dl>
+																<dt>新闻</dt>
+																<dd>新闻2</dd>
+															</dl>
+														</li>
+														<li>
+															<dl>
+																<dt>会员服务</dt>
+															</dl>
+														</li>
+														<li>
+															<dl>
+																<dt>捐赠</dt>
+															</dl>
+														</li>
+														<li>
+															<dl>
+																<dt>会员风采</dt>
+															</dl>
+														</li>
+														<li>
+															<dl>
+																<dt>圈子</dt>
+															</dl>
+														</li>
+														<li>
+															<dl>
+																<dt>期刊</dt>
+															</dl>
+														</li>
+													</ol>
+												</div>
+												<input type="text" placeholder="别名" class="alias_name" value="<%-navjson.nav_line[i+1].alias%>">
+												<a>
+													<% if (navjson.nav_line[i+1].show == true) 
+														{ %> 
+														<input type="checkbox" class="checked_0" checked>
+														<span><em>显示</em></span>
+														<% }
+														else {%>
+														<input type="checkbox" class="checked_0">
+														<span><em>隐藏</em></span>
+														<%}
+													 %> 
+													
+												</a>
+												<a class="bg_283c50 del_first">删除</a>
+											</div>
+											<div class="show_hide">
+												<em>(1)</em>
+												<a><i class="fa fa-plus-square"></i></a>
+											</div>
+										</div>
+										<div class="sec_all">
+											<% for(var a = 0; a < navjson.nav_line[i+1].sec.length; a++) {%>
+											<div class="sec_level twomenu">
+												<div class="choice">
+													<div class="select wid110">
+														<p><%-navjson.nav_line[i+1].sec[a].twomenu_name%><i class="fa fa-caret-down"></i></p>
+														<ol>
+															<li>
+																<dl>
+																	<dt>中国·上海·浦东新区总部·人力资源</dt>
+																	<dd>小花</dd>
+																	<dd>小梅</dd>
+																</dl>
+															</li>
+															<li>
+																<dl>
+																	<dt>研发部</dt>
+																	<dd>小明</dd>
+																	<dd>发仔</dd>
+																</dl>
+															</li>
+														</ol>
+													</div>
+													<input type="text" placeholder="别名" class="alias_name_2" value="<%-navjson.nav_line[i+1].sec[a].twomenu_alias%>">
+													<a class="bg_283c50 del_line">删除</a>
+												</div>
+											</div>
+											<% } %>
+											<div class="sec_level state-disabled">
+												<div class="choice">
+													<div class="select wid110">
+														<p>-- 请选择 --<i class="fa fa-caret-down"></i></p>
+														<ol>
+															<li>
+																<dl>
+																	<dt>中国·上海·浦东新区总部·人力资源</dt>
+																	<dd>小花</dd>
+																	<dd>小梅</dd>
+																</dl>
+															</li>
+															<li>
+																<dl>
+																	<dt>研发部</dt>
+																	<dd>小明</dd>
+																	<dd>发仔</dd>
+																</dl>
+															</li>
+														</ol>
+													</div>
+													<input type="text" placeholder="别名" class="alias_name_2">
+													<a class="bg_bj_b addTo">添加</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								    <% } %>
+
+									<div class="add_column"><a>添加栏目</a></div>
+								</div>
+								<div class="scrollbar" id="d4">
+									<div class="scrollbtn" id="c4"></div>
+								</div>
+							</div>
+							
+						</form>
+					</div>
+				</div>
+				<div class="tab_info" id="top_nav_tab_1">
+					<form action="">
+						<div class="top_set_wra">
+							<div class="top_set_line">
+								<div class="top_set_l">规格：</div>
+								<div class="top_set_r">
+									<% if (navjson.speDet.width[0] == "980px") 
+										{ %> 
+											<label>
+												<input type="radio" name="width" checked>
+												<p>普通</p>
+											</label>
+											<label>
+												<input type="radio" name="width">
+												<p>全屏</p>
+											</label>
+										<% }
+										else {%>
+											<label>
+												<input type="radio" name="width">
+												<p>普通</p>
+											</label>
+											<label>
+												<input type="radio" name="width" checked>
+												<p>全屏</p>
+											</label>
+										<%}
+									 %> 
+
+								</div>
+							</div>
+							<div class="top_set_line">
+								<div class="top_set_l">高度：</div>
+								<div class="top_set_r">
+									<div class="input_px">
+										<input type="text" placeholder="输入高度" value="<%-navjson.speDet.height%>" id="navHeight" onKeyUp="value=value.replace(/[^\d]/g,'')">
+										<span>像素/PX</span>
+									</div>
+								</div>
+							</div>
+							<div class="top_set_line">
+								<div class="top_set_l">上间距：</div>
+								<div class="top_set_r">
+									<div class="input_px">
+										<input type="text" placeholder="输入上间距" value="<%-navjson.speDet.marTop%>" id="navmarTop" onKeyUp="value=value.replace(/[^\d]/g,'')">
+										<span>像素/PX</span>
+									</div>
+								</div>
+							</div>
+							<div class="top_set_line">
+								<div class="top_set_l">下间距：</div>
+								<div class="top_set_r">
+									<div class="input_px">
+										<input type="text" placeholder="输入下间距" value="<%-navjson.speDet.marBottom%>" id="navmarBottom" onKeyUp="value=value.replace(/[^\d]/g,'')">
+										<span>像素/PX</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="post_but"><a class="bg_bj_b column_but">确定</a><a class="bg_999 post_cancel">取消</a></div>
+			</div>
+		</div>
+		<!-- 方案 -->
+		<div class="alert_set al_2">
+			<div class="alert_tit">方案</div>
+			<div class="tab_con">
+				<div class="tab_name nav-tabs">
+					<p class="sea_tab1 on"><a href="#save_scheme" data-toggle="tab">保存方案</a></p>
+					<p class="sea_tab2"><a href="#loading_scheme" data-toggle="tab">载入方案</a></p>
+				</div>
+				<div class="tab_info active" id="save_scheme">
+					<table class="scheme_table">
+						<tr>
+							<th class="wid300 padd_left32">方案名</th>
+							<th class="wid170">备份时间</th>
+							<th>操作</th>
+						</tr>
+						<tr class="bg_ffece6">
+							<td colspan="2">
+								<div class="name_edi">
+									<div class="name_input">
+										<input type="text" placeholder="输入新方案名称" class="new_programme">
+									</div>
+								</div>
+							</td>
+							<td>
+								<div class="edi_scheme"><a class="cover_scheme wid130">保存方案</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="name_edi">
+									<p><a><i class="fa fa-edit"></i></a>首页名称A</p>
+									<div class="name_input" style="display:none;">
+										<input type="text">
+										<a class="b_1"><i class="fa fa-check"></i></a>
+										<a class="b_2"><i class="fa fa-times"></i></a>
+									</div>
+								</div>
+							</td>
+							<td class="fontSize12">2017-04-01 10:39:24</td>
+							<td>
+								<div class="edi_scheme"><a class="cover_scheme">覆盖</a><a class="del_scheme bg_283c50">删除</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="name_edi">
+									<p><a><i class="fa fa-edit"></i></a>首页名称A</p>
+									<div class="name_input" style="display:none;">
+										<input type="text">
+										<a class="b_1"><i class="fa fa-check"></i></a>
+										<a class="b_2"><i class="fa fa-times"></i></a>
+									</div>
+								</div>
+							</td>
+							<td class="fontSize12">2017-04-01 10:39:24</td>
+							<td>
+								<div class="edi_scheme"><a class="cover_scheme">覆盖</a><a class="del_scheme bg_283c50">删除</a></div>
+							</td>
+						</tr>
+					</table>
+					<div class="page_table">
+						<a>上一页</a>
+						<input type="text" value="1">
+						<a>下一页</a>
+					</div>
+					<div class="post_but"><a class="bg_999 post_cancel">关闭</a></div>
+				</div>
+				<div class="tab_info" id="loading_scheme">
+					<table class="scheme_table">
+						<tr>
+							<th class="wid300 padd_left32">方案名</th>
+							<th class="wid170">备份时间</th>
+							<th>操作</th>
+						</tr>
+						<tr>
+							<td>
+								<div class="name_edi">
+									<p><a><i class="fa fa-edit"></i></a>首页名称A</p>
+									<div class="name_input" style="display:none;">
+										<input type="text">
+										<a class="b_1"><i class="fa fa-check"></i></a>
+										<a class="b_2"><i class="fa fa-times"></i></a>
+									</div>
+								</div>
+							</td>
+							<td class="fontSize12">2017-04-01 10:39:24</td>
+							<td>
+								<div class="edi_scheme"><a class="cover_scheme load_sch">载入</a><a class="del_scheme bg_283c50">删除</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="name_edi">
+									<p><a><i class="fa fa-edit"></i></a>首页名称A</p>
+									<div class="name_input" style="display:none;">
+										<input type="text">
+										<a class="b_1"><i class="fa fa-check"></i></a>
+										<a class="b_2"><i class="fa fa-times"></i></a>
+									</div>
+								</div>
+							</td>
+							<td class="fontSize12">2017-04-01 10:39:24</td>
+							<td>
+								<div class="edi_scheme"><a class="cover_scheme load_sch">载入</a><a class="del_scheme bg_283c50">删除</a></div>
+							</td>
+						</tr>
+					</table>
+					<div class="page_table">
+						<a>上一页</a>
+						<input type="text" value="1">
+						<a>下一页</a>
+					</div>
+					<div class="post_but"><a class="bg_999 post_cancel">关闭</a></div>
+				</div>
+			</div>
+		</div>
+		<!-- 版式风格 -->
+		<div class="alert_set al_3">
+			<div class="alert_tit">版式风格<a class="close_sty post_cancel"><i class="fa fa-close"></i></a></div>
+			<div class="tab_con">
+				<div class="layout allStyle">
+					<ul class="active" id="sec_line_0" typesetting="0">
+						<li>
+							<table>
+								<tr><td class="proportion_2_1 c_75b0fe"></td><td class="proportion_2_2 c_c4ddff"></td></tr>
+								<tr><td class="proportion_2_1 c_75b0fe borTop10"></td><td class="proportion_2_2 c_c4ddff borTop10"></td></tr>
+							</table>
+							<p><span><i class="fa fa-plus"></i></span></p>
+						</li>
+						<li>
+							<table>
+								<tr><td class="proportion_7_1 c_c4ddff"></td><td class="proportion_7_2 c_75b0fe"></td></tr>
+								<tr><td class="proportion_7_1 c_c4ddff borTop10"></td><td class="proportion_7_2 c_75b0fe borTop10"></td></tr>
+							</table>
+							<p><span><i class="fa fa-plus"></i></span></p>
+						</li>
+						<li>
+							<table>
+								<tr><td class="proportion_7_1 c_c4ddff"></td><td class="proportion_7_2 c_75b0fe" rowspan="2"></td></tr>
+								<tr><td class="proportion_7_1 c_c4ddff borTop10"></td></tr>
+							</table>
+							<p><span><i class="fa fa-plus"></i></span></p>
+						</li>
+						<li>
+							<table>
+								<tr><td class="proportion_2_1 c_75b0fe" rowspan="2"></td><td class="proportion_2_2 c_c4ddff"></td></tr>
+								<tr><td class="proportion_2_2 c_c4ddff borTop10"></td></tr>
+							</table>
+							<p><span><i class="fa fa-plus"></i></span></p>
+						</li>
+						<li>
+							<table>
+								<tr><td class="proportion_7_1 c_c4ddff" rowspan="2"></td><td class="proportion_7_2 c_75b0fe"></td></tr>
+								<tr><td class="proportion_7_2 c_75b0fe borTop10"></td></tr>
+							</table>
+							<p><span><i class="fa fa-plus"></i></span></p>
+						</li>
+						<li>
+							<table>
+								<tr><td class="proportion_2_1 c_75b0fe"></td><td class="proportion_2_2 c_c4ddff" rowspan="2"></td></tr>
+								<tr><td class="proportion_2_1 c_75b0fe borTop10"></td></tr>
+							</table>
+							<p><span><i class="fa fa-plus"></i></span></p>
+						</li>
+					</ul>
+					<ul id="sec_line_1" typesetting="0">
+						<li>
+							<table>
+								<tr>
+									<td class="proportion_4_1 c_c4ddff" rowspan="2"></td>
+									<td class="proportion_4_2 c_75b0fe" rowspan="2"></td>
+									<td class="proportion_4_3 c_c4ddff"></td>
+								</tr>
+								<tr>
+									<td class="proportion_4_3 c_c4ddff borTop10"></td>
+								</tr>
+							</table>
+							<p><span><i class="fa fa-plus"></i></span></p>
+						</li>
+						<li>
+							<table>
+								<tr>
+									<td class="proportion_4_1 c_c4ddff"></td>
+									<td class="proportion_4_2 c_75b0fe" rowspan="2"></td>
+									<td class="proportion_4_3 c_c4ddff" rowspan="2"></td>
+								</tr>
+								<tr>
+									<td class="proportion_4_3 c_c4ddff borTop10"></td>
+								</tr>
+							</table>
+							<p><span><i class="fa fa-plus"></i></span></p>
+						</li>
+						<li>
+							<table>
+								<tr>
+									<td class="proportion_4_1 c_c4ddff"></td>
+									<td class="proportion_4_2 c_75b0fe" rowspan="2"></td>
+									<td class="proportion_4_3 c_c4ddff"></td>
+								</tr>
+								<tr>
+									<td class="proportion_4_3 c_c4ddff borTop10"></td>
+									<td class="proportion_4_3 c_c4ddff borTop10"></td>
+								</tr>
+							</table>
+							<p><span><i class="fa fa-plus"></i></span></p>
+						</li>
+						<li>
+							<table>
+								<tr>
+									<td class="proportion_4_1 c_c4ddff"></td>
+									<td class="proportion_4_2 c_75b0fe"></td>
+									<td class="proportion_4_3 c_c4ddff"></td>
+								</tr>
+								<tr>
+									<td class="proportion_4_3 c_c4ddff borTop10"></td>
+									<td class="proportion_4_2 c_75b0fe borTop10"></td>
+									<td class="proportion_4_3 c_c4ddff borTop10"></td>
+								</tr>
+							</table>
+							<p><span><i class="fa fa-plus"></i></span></p>
+						</li>
+						<li>
+							<table>
+								<tr>
+									<td class="proportion_4_1 c_c4ddff" rowspan="2"></td>
+									<td class="proportion_4_2 c_75b0fe"></td>
+									<td class="proportion_4_3 c_c4ddff" rowspan="2"></td>
+								</tr>
+								<tr>
+									<td class="proportion_4_2 c_75b0fe borTop10"></td>
+								</tr>
+							</table>
+							<p><span><i class="fa fa-plus"></i></span></p>
+						</li>
+						<li>
+							<table>
+								<tr>
+									<td class="proportion_4_1 c_c4ddff" rowspan="2"></td>
+									<td class="proportion_4_2 c_75b0fe"></td>
+									<td class="proportion_4_3 c_c4ddff"></td>
+								</tr>
+								<tr>
+									<td class="proportion_4_2 c_75b0fe borTop10"></td>
+									<td class="proportion_4_3 c_c4ddff borTop10"></td>
+								</tr>
+							</table>
+							<p><span><i class="fa fa-plus"></i></span></p>
+						</li>
+						<li>
+							<table>
+								<tr>
+									<td class="proportion_4_1 c_c4ddff"></td>
+									<td class="proportion_4_2 c_75b0fe"></td>
+									<td class="proportion_4_3 c_c4ddff" rowspan="2"></td>
+								</tr>
+								<tr>
+									<td class="proportion_4_3 c_c4ddff borTop10"></td>
+									<td class="proportion_4_2 c_75b0fe borTop10"></td>
+								</tr>
+							</table>
+							<p><span><i class="fa fa-plus"></i></span></p>
+						</li>
+					</ul>
+					<ul id="sec_line_2" typesetting="0">
+						<li>
+							<table>
+								<tr><td class="proportion_5_1 c_c4ddff" rowspan="2"></td><td class="proportion_5_2 c_75b0fe"></td></tr>
+								<tr><td class="proportion_5_2 c_75b0fe borTop10"></td></tr>
+							</table>
+							<p><span><i class="fa fa-plus"></i></span></p>
+						</li>
+						<li>
+							<table>
+								<tr><td class="proportion_5_1 c_c4ddff"></td><td class="proportion_5_2 c_75b0fe" rowspan="2"></td></tr>
+								<tr><td class="proportion_5_1 c_c4ddff borTop10"></td></tr>
+							</table>
+							<p><span><i class="fa fa-plus"></i></span></p>
+						</li>
+						<li>
+							<table>
+								<tr><td class="proportion_5_1 c_c4ddff"></td><td class="proportion_5_2 c_75b0fe"></td></tr>
+								<tr><td class="proportion_5_1 c_c4ddff borTop10"></td><td class="proportion_5_2 c_75b0fe borTop10"></td></tr>
+							</table>
+							<p><span><i class="fa fa-plus"></i></span></p>
+						</li>
+					</ul>
+				</div>
+	
+			</div>
+		</div>
+	</div>
+	
+
+	<div class="save_information"><i class="fa fa-check-circle"></i>保存成功</div>
+
+	<script src="js/jquery1.9.2.min.js"></script>
+<!-- 	<script src="http://code.jquery.com/jquery-1.4.2.js"></script> -->
+	<script src="js/jquery-ui.min.js"></script>
+	<script src="js/dragMove.js"></script>
+	<script src="js/tab.js"></script>
+	<script src="js/farbtastic.js"></script>
+	<script src="js/superslide.2.1.js"></script>
+	<script src="js/gdt.js"></script>
+	<script src="js/frame.js"></script>
+
+	<script>
+		(function(){
+			var getWinHeight = $(window).height();
+			$(".loadHtml").height(getWinHeight-110+"px");
+			$(".loadHtml").load('/test');
+
+			$("#a8 .mod_all").load('/mod_sel',function(){
+				gdt("#a8","#b8","#c8","#d8");
+			});
+		}());
+		
+		(function(){
+			var top_nav_length = $(".page_nav").children("a").length;
+			var top_nav_width = $(".page_nav a").outerWidth();
+			var page_nav_width = $(".page_nav").width();
+			if(top_nav_length*top_nav_width>page_nav_width)
+			{
+				$(".page_nav").children("a").width(100/top_nav_length+"%");
+			}
+			else
+			{
+				$(".page_nav").children("a").removeAttr("style");
+			}
+
+			$(".out#a2,.out#a1,.scrollbar#d2,.scrollbar#d1").height($(window).height()-203+"px");
+			$(".out#a8,.scrollbar#d8").height($(window).height()-150+"px");
+		}());
+		
+		$(".right_page_nav .pg_t").on("click",function(){
+			var right_t = $(this).siblings(".pg_n").css("right");
+			if(right_t == "0px")
+			{
+				$(this).siblings(".pg_n").animate({
+					"right":"-100px"
+				});
+			}
+			else
+			{
+				$(this).siblings(".pg_n").animate({
+					"right":"0"
+				});
+			}
+		});
+
+		$(".left_page_nav .pg_t").on("click",function(){
+			var left_t = $(this).siblings(".fun_module").css("left");
+			if(left_t == "0px")
+			{
+				$(this).siblings(".fun_module").animate({
+					"left":"-100px"
+				});
+			}
+			else
+			{
+				$(this).siblings(".fun_module").animate({
+					"left":"0"
+				});
+			};
+		});
+
+
+
+		$(".all_layout,.mod").on("click",function(event){
+			event.stopPropagation();
+		});
+
+
+		var winheight = $(window).height()-$(".all_layout").offset().top;
+		$(".operation_panel").height(winheight);
+
+
+
+		$(document).ready(function() {
+			$('#picker2').farbtastic(".colorwell2");
+			$('#picker3').farbtastic(".colorwell3");
+			$('#picker4').farbtastic(".colorwell4");
+			$('#picker5').farbtastic(".colorwell5");
+			$('#picker6').farbtastic(".colorwell6");
+			var f = $.farbtastic('#picker');
+			$('.colorwell')
+			  .each(function () { 
+			  	f.linkTo(this);
+			  })
+			  .focus(function() {
+			    f.linkTo(this);
+			 });
+
+		});
+
+
+		$(".mod").on("click",function(){
+			$(".all_layout").animate({
+					"left":"100px"
+			},500);
+			var thisindex = $(this).index();
+			$(".wra_lay").animate({
+				top: -thisindex*winheight + "px"
+			},500);
+		});
+
+		$(function(){
+			gdt("#a1","#b1","#c1","#d1");
+			gdt("#a2","#b2","#c2","#d2");
+			gdt("#a4","#b4","#c4","#d4");
+			gdt("#a5","#b5","#c5","#d5");
+			gdt("#a6","#b6","#c6","#d6");
+
+
+			$(".textarea_name textarea").keyup(function(){
+				var thisVal = $(this).val();
+				$(".association_name p").text(thisVal);
+			});
+			$(".size_f li").on("click",function(){
+				var thisVal = $(this).text();
+				$(".association_name p").css("font-size",thisVal+"px");
+			});
+			$(".fam_font li").on("click",function(){
+				var thisVal = $(this).text();
+				$(".association_name p").css("font-family",thisVal);
+			});
+		});
+
+	</script>
+	 <script type="text/javascript">
+	   var xhr;
+       function UpladFile() {
+            var fileObj = document.getElementById("up_img_0").files[0]; // js 获取文件对象
+            var url =  "http://test03.53wy.com/br-isoc/fi/simpleByUser"; // 接收上传文件的后台地址
+            var form = new FormData(); // FormData 对象
+            form.append("file", fileObj); // 文件对象
+
+            xhr = new XMLHttpRequest();  // XMLHttpRequest 对象
+            xhr.open("post", url, true); //post方式，url为服务器请求地址，true 该参数规定请求是否异步处理。
+            xhr.onload = uploadComplete; //请求完成
+            xhr.onerror =  uploadFailed; //请求失败
+           // xhr.upload.onprogress = progressFunction;//【上传进度调用方法实现】
+            xhr.upload.onloadstart = function(){//上传开始执行方法
+                ot = new Date().getTime();   //设置上传开始时间
+                oloaded = 0;//设置上传开始时，以上传的文件大小为0
+            };
+
+            xhr.send(form); //开始上传，发送form数据
+        }
+        function uploadComplete(evt) {
+            //服务断接收完文件返回的结果
+            var jsonBack = JSON.parse(evt.target.responseText);
+            var data = jsonBack.params.url
+            var url = "http://storage.53wy.com/";
+            $(".loadImg").attr("src",url+data);
+        }
+         //上传失败
+        function uploadFailed(evt) {
+            alert("上传失败！");
+        }
+        //取消上传
+        function cancleUploadFile(){
+            xhr.abort();
+        }
+       $("#up_img_0").change(function(){
+       	UpladFile();
+       });
+
+		;$(function() {  
+		    // 调用插件
+		    $('body').dragMove({  
+		        limit: true,// 限制在窗口内  
+		        callback: function($move, $replace) {
+		        	if($move.height() != $replace.height())
+		        	{
+		        		if($move.hasClass("line_1"))
+		        		{
+		        			$move.removeClass("line_1").addClass("line_2");
+		        			$replace.removeClass("line_2").addClass("line_1");
+		        			
+		        		}
+		        		else if($move.hasClass("line_2"))
+		        		{
+		        			$move.removeClass("line_2").addClass("line_1");
+		        			$replace.removeClass("line_1").addClass("line_2");
+		        		}
+		        	}
+		        }  
+		    });  
+		}); 
+
+	 </script>
+
+</body>
+</html>
+

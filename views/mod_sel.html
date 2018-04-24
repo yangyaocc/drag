@@ -1,0 +1,17 @@
+<% for (var i=0; i < navLmJson.length; i++) {%>
+	<% if (navLmJson[i].columnDTO.parentId == 0) {%>
+		<div class="mod_line">
+			<dl>
+				<dt><label><input type="checkbox" data-inputId="<%-navLmJson[i].columnDTO.id%>"><i></i><%-navLmJson[i].columnDTO.columnName%></label></dt>
+				<% for (var j=0; j < navLmJson.length; j++) {%>
+					<% if (navLmJson[j].columnDTO.parentId == navLmJson[i].columnDTO.id) {%>
+						<dd><label><input type="checkbox" data-inputId="<%-navLmJson[j].columnDTO.id%>"><i></i><%-navLmJson[j].columnDTO.columnName%></label></dd>
+					<%}%>
+				<% } %>
+			</dl>
+		</div>
+	<%}%>
+<% } %>
+
+
+
